@@ -1,0 +1,76 @@
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <input
+          type="text"
+          class="form-control"
+          placeholder="Searc User..."
+          (keyup)="search(query.value)"
+          #query
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row animated fadeIn fast" *ngIf="loading">
+    <div class="col-12">
+      <div class="alert alert-info ">
+        <h4 class="alert-heading">
+          <i class="fa fa-spin fa-refresh"></i>
+          Loading...
+          <span class="mb-0"><strong>Please wait.</strong></span>
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+<div class="card animated fadeIn fast" *ngIf="!loading">
+    <div class="card-body">
+      <h4 class="card-title"><strong> Users List </strong><strong class="text-info">{{ totalUsers }}</strong> </h4>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>UserName</th>
+              <th>Email</th>
+              <th class="w100">Picture</th>
+              <th>Role</th>
+
+              <th class="text-nowrap w100 ">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of userList">
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+
+              <td class="text-center"><img ngClass="picture pointer" [src]="user.img | picturemodel:'users'" (click)="shownModal(user)"></td>
+              <td>
+                <select
+                [(ngModel)]="user.role"
+                (change)="updateUserRole(user)"
+                >
+                <option value="USER_ROLE" class="text-success">User</option>
+                <option value="ADMIN_ROLE" class="text-info">Admin</option>
+
+                </select>
+              </td>
+              <td class="text-center">
+                <a data-toggle="tooltip" data-original-title="Delete" (click)="deleteUser(user)"> <i class="fa fa-trash text-danger pointer"></i> </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="query.value.length===0">
+
+        <button (click)="userPagination(-5)" class="btn btn-secondary">Previous</button>
+        &nbsp;
+        <button (click)="userPagination(5)" class="btn btn-secondary">Next</button>
+
+      </div>
+    </div>
+</div>

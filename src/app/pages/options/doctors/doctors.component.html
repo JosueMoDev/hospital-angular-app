@@ -1,0 +1,88 @@
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group">
+            <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            #query
+            (keyup)="search(query.value)"
+            >
+            <span class="input-group-btn">
+              <button  class="btn btn-secondary" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row animated fadeIn slow" *ngIf="loading">
+    <div class="col-12">
+      <div class="alert alert-info ">
+        <h4 class="alert-heading">
+          <i class="fa fa-spin fa-refresh"></i>
+          Loading...
+          <span class="mb-0"><strong>Please wait.</strong></span>
+        </h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+<div class="card">
+    <div class="card-body">
+
+      <h2 class="card-title">Doctor List</h2>
+      <div class="text-right pb-4">
+        <button [routerLink]="['/dashboard/doctors','new']" class="btn btn-primary">
+          <i class="fa fa-hospital-o"></i>
+          New Doctor
+        </button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Picture</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doctor of doctorList">
+              <td>
+                <div class="input-group">
+                  <input
+                  type="text"
+                  class="form-control"
+                  placeholder="doctor name"
+                  [(ngModel)]="doctor.name"
+                  >
+                </div>
+              </td>
+              <td class="text-center w100"> <img ngClass="picture pointer" [src]="doctor.img | picturemodel:'doctors'" alt="" (click)="shownModal(doctor)"></td>
+
+              <td class="text-center w200">
+                <button (click)="deleteDoctor(doctor)" class="btn btn-danger mr-2"> <i class="fa fa-trash"></i> </button>
+                <button [routerLink]="['/dashboard/doctors', doctor.doctor_id]" class="btn btn-info ml-2"> <i class="fa fa-pencil"></i> </button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="query.value.length===0">
+
+          <button (click)="doctorPagination(-5)" class="btn btn-secondary">Previous</button>
+          &nbsp;
+          <button (click)="doctorPagination(5)" class="btn btn-secondary">Next</button>
+
+        </div>
+      </div>
+    </div>
+</div>
+

@@ -1,0 +1,52 @@
+  <!-- ============================================================== -->
+  <!-- Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  <aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="user-profile">
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void()" aria-expanded="false"><img [src]="data.userImagenProfil" alt="user" /><span class="hide-menu">{{data.name}} </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a routerLink="profile">My Profile </a></li>
+                        <li><a href="javascript:void()">My Balance</a></li>
+                        <li><a href="javascript:void()">Inbox</a></li>
+                        <li><a routerLink="settings">Account Setting</a></li>
+                        <li><a Logout routerLink="/login">Logout</a></li>
+                    </ul>
+                </li>
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap">PERSONAL</li>
+                <li *ngFor="let item of menuItems">
+                   <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                      <i class="{{item.icon}}"></i>
+                      <span class="hide-menu">
+                        {{ item.tittle }}
+                        <span class="label label-rouded label-themecolor pull-right">
+                          {{ item.submenu.length}}
+                        </span>
+                      </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse" *ngFor="let itemlist of item.submenu">
+                        <li>
+                          <a
+                          routerLink="{{ itemlist.url }}"
+                          routerLinkActive="active"
+                          [routerLinkActiveOptions]="{exact:true}"
+                          >
+                          {{ itemlist.name }}
+                         </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

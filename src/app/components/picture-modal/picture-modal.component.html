@@ -1,0 +1,38 @@
+
+  <!-- sample modal content -->
+  <div
+    id="responsive-modal"
+    class="modal fade show"
+    [class.hiddenModal]="pictureModal.shownModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+
+    aria-hidden="true"
+    >
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title">Change Profile Picture</h4>
+                  <button type="button" class="close" (click)="hiddenModal()"><i class="fa fa-times"></i></button>
+              </div>
+              <div class="modal-body">
+                <div class="text-center">
+                  <img *ngIf="!imgTemp" [src]="pictureModal.picture" class="img-avatar pictureModal">
+                  <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar pictureModal">
+              </div>
+
+              <input
+                type="file"
+                 (change)="uploadPicture($event.target)"
+              >
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default waves-effect" (click)="hiddenModal()" >Close</button>
+                  <button type="button" class="btn btn-success waves-effect waves-light" (click)="updatePicture()"><i class="fa fa-check"></i>Update</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- /.modal -->
+

@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="card col-6">
+    <div >
+      <div class="card-body">
+          <div *ngIf="doctor; else creatingDoctor" >
+            <h4><strong class="card-title">Editing to: <span>{{doctor.name}}</span></strong></h4>
+            <div class="card-body little-profile text-center">
+              <div  class="pro-img m-t-10"><img [src]="doctor.img|picturemodel:'doctors'" alt="user" (click)="shownModal(doctor)"></div>
+            </div>
+          </div>
+          <ng-template #creatingDoctor>
+            <h4><strong class="card-title">Creating a new Doctor</strong></h4>
+          </ng-template>
+          <form
+          class="form p-t-20"
+          [formGroup]="doctorForm"
+          (ngSubmit)="createANewDoctor()"
+          >
+              <div class="form-group">
+                  <label for="exampleInputuname">Doctor Name</label>
+                  <div class="input-group">
+                      <div class="input-group-addon"><i class="ti-user"></i></div>
+                      <input
+                       type="text"
+                       class="form-control"
+                       formControlName="name"
+                    >
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputEmail1">Hospital</label>
+                  <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-hospital-o"></i></div>
+                      <select
+                      class="input-group"
+                      formControlName="hospital"
+                      >
+                      <option *ngFor="let hospital of hospitals"
+                      [value]="hospital.hospital_id"
+                      >
+                        {{ hospital.name }}
+                      </option>
+
+
+                      </select>
+                  </div>
+              </div>
+              <div *ngIf="doctor">
+                <h4 class="card-title">Additional information:</h4>
+                <hr>
+
+                <div class="form-group">
+                  <label for="exampleInputuname">Created by</label>
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="ti-user"></i></div>
+                    <input
+                    type="text"
+                    class="form-control"
+                    disabled
+                    [value]="doctor.user?.name"
+
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+              <button [routerLink]="['/dashboard', 'doctors']"class="btn btn-inverse waves-effect waves-light">Cancel</button>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 animated fadeIn fast"
+  *ngIf="hospitalSelected">
+  <div class="card">
+      <div class="card-body">
+
+          <h2 class="card-title">Hospital</h2>
+          <h3 class="card-subtitle">{{ hospitalSelected.name}}</h3>
+
+          <img [src]="hospitalSelected.img | picturemodel:'hospitals'"
+              class="img-thumbnail"/>
+
+      </div>
+  </div>
+
+</div>
+</div>
+

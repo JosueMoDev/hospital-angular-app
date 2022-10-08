@@ -1,0 +1,118 @@
+<div *ngIf="alert===0" class="row animated fadeIn">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <div class="alert alert-rounded alert-info ">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+          <h4 class="row"><span class="text-info mr-2"><i class="fa fa-exclamation-circle"></i></span>
+            <p class="mb-0 ">
+              We could'nt found anything related about <strong class="ml-2">{{ query|titlecase }}</strong>
+            </p>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div *ngIf="users.length>0" class="row animated fadeIn">
+  <div class="col">
+    <div class="card">
+      <h3 class="ml-5 mt-4"><strong>Users: </strong>{{ users.length }}<span></span></h3>
+      <div class="card-body">
+           <!-- here we gonna load users -->
+      <div class="row el-element-overlay">
+        <div class="col-lg-4 col-md-6 mb-5 " *ngFor="let user of users">
+            <div class="card">
+              <div class="card-body">
+                <div class="el-card-item img">
+                  <div class="el-card-avatar el-overlay-1"> <img  [src]="user.img | picturemodel:'users'" alt="user">
+                        <div class="el-overlay">
+                            <ul class="el-info">
+                                <li><a class="btn default btn-outline"><i class="fa fa-eye"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="el-card-content pt-2 pb-2">
+                        <h4 class="box-title">{{user.name}}</h4> <small>Managing Director</small>
+                        <br> </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="hospitals.length>0" class="row animated fadeIn">
+  <div class="col">
+    <div class="card">
+      <h3 class="ml-5 mt-4"><strong>Hospitals: </strong>{{ hospitals.length }}<span></span></h3>
+      <div class="card-body">
+              <!-- here we gonna load hospitals -->
+          <div  class="row el-element-overlay">
+            <div class="col-lg-4 col-md-6 mb-5" *ngFor="let hospital of hospitals">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="el-card-item img">
+                      <div class="el-card-avatar el-overlay-1"> <img  [src]="hospital.img | picturemodel:'hospitals'" alt="hospital.name">
+                            <div class="el-overlay">
+                                <ul class="el-info">
+                                    <li><a class="btn default btn-outline"><i class="fa fa-eye"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="el-card-content pt-2 pb-2">
+                            <h4 class="box-title">{{hospital.name}}</h4> <small>Managing Director</small>
+                            <br> </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="doctors.length>0" class="row animated fadeIn">
+  <div class="col">
+    <div class="card">
+      <h3 class="ml-5 mt-4"><strong>Doctors: </strong>{{ doctors.length }}<span></span></h3>
+      <div class="card-body">
+              <!-- here we gonna load doctors -->
+          <div  class="row el-element-overlay">
+            <div class="col-md-12">
+            </div>
+            <div class="col-lg-4 col-md-6 mb-5" *ngFor="let doctor of doctors">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="el-card-item img">
+                      <div class="el-card-avatar el-overlay-1"> <img  [src]="doctor.img | picturemodel:'doctors'" alt="doctor.name">
+                            <div class="el-overlay">
+                                <ul class="el-info">
+                                    <li><a [routerLink]="['/dashboard/doctors', doctor.doctor_id]" class="btn default btn-outline"><i class="fa fa-eye"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="el-card-content pt-2 pb-2">
+                            <h4 class="box-title">{{doctor.name}}</h4> <small>Managing Director</small>
+                            <br> </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
